@@ -12,5 +12,6 @@
 ## Third Party
 
 + [OpenCV](./3rdparty/opencv/README.md)
++ [x264](./3rdparty/x264/README.md): H264 Encoder
 + cmdline
 + inih
