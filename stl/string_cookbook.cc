@@ -169,6 +169,7 @@ int main() {
   string_operations();
   find();
   modify();
-
+  iter();
+  capacity();
   return 0;
 }

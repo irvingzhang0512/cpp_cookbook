@@ -11,6 +11,6 @@
 
 ## Third Party
 
-+ [OpenCV](./3rdparty/src/opencv_cookbook.cc)
++ [OpenCV](./3rdparty/opencv/README.md)
 + cmdline
 + inih
