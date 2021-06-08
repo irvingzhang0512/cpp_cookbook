@@ -2,8 +2,7 @@
 
 ## Overview
 
-+ Features:
-
++ Features: Encode each frame from a local video to h264 bytes.
 
 ## Tutorial
 

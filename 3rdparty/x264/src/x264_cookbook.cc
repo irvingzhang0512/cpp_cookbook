@@ -10,10 +10,6 @@ int main() {
   x264Encoder m_x264Encoder((int)cap.get(cv::CAP_PROP_FRAME_WIDTH),
                             (int)cap.get(cv::CAP_PROP_FRAME_HEIGHT), 3,
                             (int)cap.get(cv::CAP_PROP_FPS));
-  int jpeg_quality = 75;
-  std::vector<int> params;
-  params.push_back(cv::IMWRITE_JPEG_QUALITY);
-  params.push_back(jpeg_quality);
 
   while (1) {
     cap >> frame;
