@@ -90,4 +90,34 @@ source devel/setup.bash
 rosrun hello_world main
 ```
 
-## Publisher and 
+## Publisher and Subscriber
+
++ 
+
+```shell
+cd /path/to/cpp_cookbook/3rdparty/ros
+
+# 1. Make sure workspace is probably created.
+# 2. Create pkg with dependencies `roscpp` and `std_msgs`
+#   Please note that, we don't need to add dependencies manually.
+cd src
+catkin_create_pkg topic_example roscpp std_msgs
+cd ..
+
+# 3. Create publish_node.cc and subscribe_node.cc in src/topic_example/src
+# 4. Compile pkg
+catkin_make -DCATKIN_WHITELIST_PACKAGES="topic_example"
+
+# 5. Run
+# Terminal No.1, roscore
+roscore
+# Terminal No.2, publisher
+cd /path/to/cpp_cookbook/3rdparty/ros
+source devel/setup.bash
+rosrun topic_example publish_node 
+# Terminal No.3, subscriber
+cd /path/to/cpp_cookbook/3rdparty/ros
+source devel/setup.bash
+rosrun topic_example subscribe_node 
+
+```
