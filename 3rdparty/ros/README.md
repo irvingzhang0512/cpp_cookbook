@@ -83,11 +83,13 @@ target_link_libraries(main ${catkin_LIBRARIES})
     + Compile the whole workspace: `cd /path/to/cpp_cookbook/3rdparty/ros && catkin_make`
     + Compile single pkg: `cd /path/to/cpp_cookbook/3rdparty/ros && catkin_make -DCATKIN_WHITELIST_PACKAGES="hello_world"`
   + Run:
-    + Terminal No.1: `roscore`
-    + Terminal No.2:
 
 ```shell
-cd /path/to/cpp_cookbook/3rdparty/ros
+# Terminal No.1
+source devel/setup.bash
+roscore
+
+# Terminal No.2
 source devel/setup.bash
 # where `hello_world` is from `catkin_create_pkg hello_world`
 # `main` is from `add_executable(main src/main.cpp)`
@@ -114,6 +116,7 @@ catkin_make -DCATKIN_WHITELIST_PACKAGES="topic_example"
 
 # 5. Run
 # Terminal No.1, roscore
+source devel/setup.bash
 roscore
 # Terminal No.2, publisher
 cd /path/to/cpp_cookbook/3rdparty/ros
@@ -138,7 +141,10 @@ cd src
 catkin_create_pkg custom_msg_example roscpp std_msgs
 cd ..
 
-# 3. Create msg file `can_data.msg` in `src/custom_msg_example/msg`
+# 3. Create msg file `can_data.msg` in `src/custom_msg_example/msg`, compile to generate header file.
+#   Please note that, we have to generate header file first, or `#include <custom_msg_example/can_data.h>` will raise header file not found error.
+catkin_make -DCATKIN_WHITELIST_PACKAGES="custom_msg_example"
+
 # 4. Modify related configs(List custom msg related configs)
 # 4.1. package.xml
 #   Uncomment the following lines
@@ -155,6 +161,7 @@ cd ..
 # 6. Compile and run
 catkin_make -DCATKIN_WHITELIST_PACKAGES="custom_msg_example"
 # Terminal No.1, roscore
+source devel/setup.bash
 roscore
 # Terminal No.2, publisher
 cd /path/to/cpp_cookbook/3rdparty/ros
@@ -164,4 +171,38 @@ rosrun custom_msg_example publisher
 cd /path/to/cpp_cookbook/3rdparty/ros
 source devel/setup.bash
 rosrun custom_msg_example subscriber 
+```
+
+## OpenCV Image Example
+
++ Create a publisher/subscriber to send/receive images.
++ If using another version of OpenCV(instead of OpenCV in ROS), cv_bridge should be modified.
+  + Method 1: Build cv_bridge from source.
+  + Method 2: Modify OpenCV related configs in cv_bridge, related [notes](https://blog.csdn.net/weixin_43436587/article/details/107711866)
+
+```shell
+cd /path/to/cpp_cookbook/3rdparty/ros
+
+# 1. Make sure workspace is probably created.
+# 2. Create pkg with dependencies `roscpp` and `std_msgs`
+cd src
+catkin_create_pkg image_opencv_example roscpp cv_bridge image_transport
+cd ..
+
+# 3. Modify configs: add opencv related configs in `CMakeLists.txt`, include `find_package(OpenCV)` and `target_link_libraries(target_name ${OpenCV_LIBS})`
+
+# 4. Add image_publisher.cc and image_subscriber.cc
+# 5. compile and run
+catkin_make -DCATKIN_WHITELIST_PACKAGES="image_opencv_example"
+# Terminal No.1, roscore
+source devel/setup.bash
+roscore
+# Terminal No.2, publisher
+cd /path/to/cpp_cookbook/3rdparty/ros
+source devel/setup.bash
+rosrun image_opencv_example image_publisher 
+# Terminal No.3, subscriber
+cd /path/to/cpp_cookbook/3rdparty/ros
+source devel/setup.bash
+rosrun image_opencv_example image_subscriber 
 ```

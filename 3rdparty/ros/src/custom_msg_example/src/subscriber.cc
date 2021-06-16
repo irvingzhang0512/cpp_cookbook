@@ -9,7 +9,6 @@ void customMsgCallback(const custom_msg_example::can_data msg) {
   printf("len %d\n", msg.len);
   printf("data [%d,%d,%d,%d]\n", msg.data[0], msg.data[1], msg.data[2],
          msg.data[3]);
-  printf(msg.data.length());
 //   printf("data [%d,%d,%d,%d]\n", msg.data.at(0), msg.data.at(1), msg.data.at(2),
 //          msg.data.at(3));
 }
