@@ -27,8 +27,8 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
 )
 
-# add_executable(publisher src/publisher.cc)
-# target_link_libraries(publisher ${catkin_LIBRARIES})
+add_executable(publisher src/publisher.cc)
+target_link_libraries(publisher ${catkin_LIBRARIES})
 
-# add_executable(subscriber src/subscriber.cc)
-# target_link_libraries(subscriber ${catkin_LIBRARIES})
+add_executable(subscriber src/subscriber.cc)
+target_link_libraries(subscriber ${catkin_LIBRARIES})

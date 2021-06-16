@@ -206,3 +206,40 @@ cd /path/to/cpp_cookbook/3rdparty/ros
 source devel/setup.bash
 rosrun image_opencv_example image_subscriber 
 ```
+
+## Synchronizer Demo
+
++ Use Time Synchronizer to read data from multiple topics and fuse data from these topics.
+  + Read data from previous pkgs, custom msg publisher and image publisher.
+
+```shell
+
+cd /path/to/cpp_cookbook/3rdparty/ros
+
+# 1. Make sure workspace is probably created.
+# 2. Create pkg with dependencies
+cd src
+catkin_create_pkg image_opencv_example roscpp cv_bridge image_transport std_msgs custom_msg_example message_filters
+cd ..
+
+# 3. Modify configs: add opencv related configs in `CMakeLists.txt`, include `find_package(OpenCV)` and `target_link_libraries(target_name ${OpenCV_LIBS})`
+
+# 4. Add synchronizer_demo.cc
+# 5. compile and run(need to run two publisher from previous pkgs)
+catkin_make -DCATKIN_WHITELIST_PACKAGES="synchronizer_example"
+# Terminal No.1, roscore
+source devel/setup.bash
+roscore
+# Terminal No.2, image publisher
+cd /path/to/cpp_cookbook/3rdparty/ros
+source devel/setup.bash
+rosrun image_opencv_example image_publisher 
+# Terminal No.3, custom msg publisher
+cd /path/to/cpp_cookbook/3rdparty/ros
+source devel/setup.bash
+rosrun custom_msg_example publisher 
+# Terminal No.4, synchronizer demo
+cd /path/to/cpp_cookbook/3rdparty/ros
+source devel/setup.bash
+rosrun synchronizer_example synchronizer_demo 
+```
