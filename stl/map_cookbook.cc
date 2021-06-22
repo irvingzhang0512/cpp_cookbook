@@ -95,6 +95,9 @@ void other() {
 
   // cnt could only be 0 or 1, whether this map contains this key
   int cnt = m.count(2);
+
+  m.empty();
+  m.size();
 }
 
 int main(int argc, char** argv) {
