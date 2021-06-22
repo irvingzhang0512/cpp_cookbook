@@ -7,6 +7,8 @@
   + [Hello World Example](#hello-world-example): What you need to do to create a ROS app.
   + [Publisher and Subscribe](#publisher-and-subscriber): String demo for publisher and subsciber.
   + [Create Custom Message](#create-custom-message): Create a custom message, use publisher/subscriber to send/receive messages.
+  + [OpenCV Image Example](#opencv-image-example): Create a publisher and subscriber for image data.
+  + [Filter Demo](#filter-demo): Create a filter to load data from mutiple topic and fuse as one.
 
 ## Hello World Example
 
@@ -207,7 +209,7 @@ source devel/setup.bash
 rosrun image_opencv_example image_subscriber 
 ```
 
-## Synchronizer Demo
+## Filter Demo
 
 + Use Time Synchronizer to read data from multiple topics and fuse data from these topics.
   + Read data from previous pkgs, custom msg publisher and image publisher.
