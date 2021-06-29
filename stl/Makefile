@@ -1,4 +1,4 @@
-all: test_string test_vector test_map test_set
+all: test_string test_vector test_map test_set test_queue test_thread
 
 test_vector: vector_cookbook.cc
 	g++ vector_cookbook.cc -std=c++11 -o test_vector
@@ -12,8 +12,11 @@ test_map: map_cookbook.cc
 test_set: set_cookbook.cc
 	g++ set_cookbook.cc -std=c++11 -o test_set
 
-test_set: queue_cookbook.cc
+test_queue: queue_cookbook.cc
 	g++ queue_cookbook.cc -std=c++11 -o test_queue
+
+test_thread: thread_cookbook.cc
+	g++ thread_cookbook.cc -std=c++11 -o test_thread -lpthread
 
 .PHONY: clean
 clean:
