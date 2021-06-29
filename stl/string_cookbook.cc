@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
 
 void initialize() {
   // Inialize with construct
@@ -82,7 +83,7 @@ void find() {
 }
 
 void modify() {
-  const char* chars = "123456";
+  const char *chars = "123456";
   std::string str1 = "12345";
   std::string str2 = "45678";
 
@@ -145,7 +146,8 @@ void iter() {
   // there are four types of iter
   // begin/end, rbegin/rend, cbegin/cend, crbegin, crend
   // `r` refers to `reverse`, which means loop from right to left
-  // `c` refers to `const`, which means we cannot modify the value of the elements
+  // `c` refers to `const`, which means we cannot modify the value of the
+  // elements
   for (auto it = str.begin(); it < str.end(); it++) {
     std::cout << *it << std::endl;
   }
@@ -164,6 +166,17 @@ void capacity() {
   str.capacity();
 }
 
+static void split(const std::string &s, std::vector<std::string> &tokens,
+                  const std::string &delimiters = ",") {
+  std::string::size_type lastPos = s.find_first_not_of(delimiters, 0);
+  std::string::size_type pos = s.find_first_of(delimiters, lastPos);
+  while (std::string::npos != pos || std::string::npos != lastPos) {
+    tokens.push_back(s.substr(lastPos, pos - lastPos));
+    lastPos = s.find_first_not_of(delimiters, pos);
+    pos = s.find_first_of(delimiters, lastPos);
+  }
+}
+
 int main() {
   initialize();
   string_operations();
@@ -171,5 +184,11 @@ int main() {
   modify();
   iter();
   capacity();
+
+  std::vector<std::string> tokens;
+  std::string src = "1,2,3,4,5";
+  split(src, tokens, ",");
+  assert(tokens.size() == 5);
+
   return 0;
 }
