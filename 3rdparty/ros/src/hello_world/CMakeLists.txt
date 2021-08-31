@@ -6,5 +6,5 @@ find_package(catkin REQUIRED COMPONENTS roscpp)
 catkin_package()
 include_directories(${catkin_INCLUDE_DIRS})
 
-add_executable(main src/main.cc)
-target_link_libraries(main ${catkin_LIBRARIES})
+add_executable(hello_world src/hello_world.cc)
+target_link_libraries(hello_world ${catkin_LIBRARIES})

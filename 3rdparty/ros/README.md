@@ -4,15 +4,22 @@
 
 + Need to install ros first.
 + Example List
-  + [Hello World Example](#hello-world-example): What you need to do to create a ROS app.
+  + [Hello World Example](#example-no-1---hello-world-example): What you need to do to create a ROS app.
   + [Publisher and Subscribe](#publisher-and-subscriber): String demo for publisher and subsciber.
   + [Create Custom Message](#create-custom-message): Create a custom message, use publisher/subscriber to send/receive messages.
   + [OpenCV Image Example](#opencv-image-example): Create a publisher and subscriber for image data.
   + [Filter Demo](#filter-demo): Create a filter to load data from mutiple topic and fuse as one.
 
-## Hello World Example
+## Example No. 1 - Hello World Example
 
-+ Init workspace:
++ source codes [here](./src/hello_world)
++ Pileline
+  + Step 1: Create workspace
+  + Step 2: Create package
+  + Step 3: Add related codes. Modify `package.xml` & `CMakeLists.txt`, add `src/hello_world.cc`
+  + Step 4: Run `hello_world` Node.
+
++ Step 1: Create workspace
 
 ```shell
 # /path/to/cpp_cookbook/3rdparty/ros is empty
@@ -31,7 +38,7 @@ catkin_make
 source devel/setup.bash
 ```
 
-+ Init pkg
++ Step 2: Create package
 
 ```shell
 cd /path/to/cpp_cookbook/3rdparty/ros
@@ -42,7 +49,10 @@ cd src
 catkin_create_pkg hello_world
 ```
 
-+ Add Hello World code in pkg, `src/hello_world/src/main.cc`
++ Step 3: Add Hello World code in pkg
+  + Modify `src/hello_world/src/hello_world.cc`
+  + Modify pkg cmake config, aka `src/hello_world/CMakeLists.txt` and `src/hello_world/package.xml`
+  + Modify `src/hello_world/package.xml`
 
 ```cpp
 #include "ros/ros.h"
@@ -56,8 +66,6 @@ int main(int argc,char **argv)
   ROS_INFO_STREAM("hello world!!!");
 }
 ```
-
-+ Modify pkg cmake config, aka `src/hello_world/CMakeLists.txt` and `src/hello_world/package.xml`
 
 ```cmake
 cmake_minimum_required(VERSION 3.0.2)
@@ -80,7 +88,7 @@ target_link_libraries(main ${catkin_LIBRARIES})
 <exec_depend>roscpp</exec_depend>
 ```
 
-+ Compile and run
++ Step 4: Compile and run
   + Compile
     + Compile the whole workspace: `cd /path/to/cpp_cookbook/3rdparty/ros && catkin_make`
     + Compile single pkg: `cd /path/to/cpp_cookbook/3rdparty/ros && catkin_make -DCATKIN_WHITELIST_PACKAGES="hello_world"`
